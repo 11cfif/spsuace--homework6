@@ -14,7 +14,13 @@ public class AccountManager {
      * Класс Account непотокобезопасный и менять его нельзя
      *
      */
-    public boolean transfer(Account from, Account to, long sum) {
-        return false;
+    public synchronized boolean transfer(Account from, Account to, long sum) {
+        if(from.getBalance()<sum){
+            return false;
+        }else{
+            from.withdraw(sum);
+            to.deposit(sum);
+            return true;
+        }
     }
 }
