@@ -14,8 +14,8 @@ public class AccountManager {
      * Класс Account непотокобезопасный и менять его нельзя
      */
     public boolean transfer(Account from, Account to, long sum) {
-        Object lock1 = from.hashCode() < to.hashCode() ? from : to;
-        Object lock2 = from.hashCode() < to.hashCode() ? to : from;
+        Account lock1 = from.hashCode() < to.hashCode() ? from : to;
+        Account lock2 = from.hashCode() < to.hashCode() ? to : from;
         synchronized (lock1) {
             synchronized (lock2) {
                 if (from.getBalance() < sum) {
